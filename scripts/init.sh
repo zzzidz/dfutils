@@ -1,7 +1,21 @@
+mkdir /workspace
 cd /workspace
 
-apt -y install -qq aria2 -y
+wget http://launchpadlibrarian.net/367274644/libgoogle-perftools-dev_2.5-2.2ubuntu3_amd64.deb
+wget https://launchpad.net/ubuntu/+source/google-perftools/2.5-2.2ubuntu3/+build/14795286/+files/google-perftools_2.5-2.2ubuntu3_all.deb
+wget https://launchpad.net/ubuntu/+source/google-perftools/2.5-2.2ubuntu3/+build/14795286/+files/libtcmalloc-minimal4_2.5-2.2ubuntu3_amd64.deb
+wget https://launchpad.net/ubuntu/+source/google-perftools/2.5-2.2ubuntu3/+build/14795286/+files/libgoogle-perftools4_2.5-2.2ubuntu3_amd64.deb
+apt install -qq libunwind8-dev -y
+dpkg -i *.deb
+env LD_PRELOAD=libtcmalloc.so
+rm *.deb
 
+pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116 -U
+apt -y install -qq aria2 -y
+pip install -q xformers==0.0.16
+pip install -q triton==2.0.0
+
+git clone -b v2.0 https://github.com/camenduru/stable-diffusion-webui
 git clone https://huggingface.co/embed/negative /workspace/stable-diffusion-webui/embeddings/negative
 git clone https://huggingface.co/embed/lora /workspace/stable-diffusion-webui/models/Lora/positive
 wget https://raw.githubuserworkspace.com/camenduru/stable-diffusion-webui-scripts/main/run_n_times.py -O /workspace/stable-diffusion-webui/scripts/run_n_times.py
@@ -49,8 +63,8 @@ aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/ckp
 
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M "https://civitai.com/api/download/models/6987?type=Model&format=SafeTensor" -d /workspace/stable-diffusion-webui/models/Stable-diffusion -o realisticVisionV13_v13.safetensors --check-certificate=false
 
-# sed -i -e '''/    prepare_environment()/a\    os.system\(f\"""sed -i -e ''\"s/dict()))/dict())).cuda()/g\"'' /workspace/stable-diffusion-webui/repositories/stable-diffusion-stability-ai/ldm/util.py""")''' /workspace/stable-diffusion-webui/launch.py
-# sed -i -e 's/fastapi==0.90.1/fastapi==0.89.1/g' /workspace/stable-diffusion-webui/requirements_versions.txt
+sed -i -e '''/    prepare_environment()/a\    os.system\(f\"""sed -i -e ''\"s/dict()))/dict())).cuda()/g\"'' /workspace/stable-diffusion-webui/repositories/stable-diffusion-stability-ai/ldm/util.py""")''' /workspace/stable-diffusion-webui/launch.py
+sed -i -e 's/fastapi==0.90.1/fastapi==0.89.1/g' /workspace/stable-diffusion-webui/requirements_versions.txt
 
 mkdir /workspace/stable-diffusion-webui/extensions/deforum-for-automatic1111-webui/models
 
