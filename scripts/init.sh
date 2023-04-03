@@ -38,6 +38,10 @@ git clone https://github.com/ashen-sensored/stable-diffusion-webui-two-shot /wor
 cd /workspace/stable-diffusion-webui
 git reset --hard
 
+
+aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/zzztuizz/tsin1/resolve/main/output/last.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o tsinnew.safetensors --check-certificate=false
+aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/zzztuizz/tsin/resolve/main/output/tsin-000010.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o tsin010.safetensors --check-certificate=false
+aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/zzztuizz/dqt4/resolve/main/output/last.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o dqt15ep.safetensors --check-certificate=false
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/ckpt/ControlNet/resolve/main/control_canny-fp16.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models -o control_canny-fp16.safetensors --check-certificate=false
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/ckpt/ControlNet/resolve/main/control_depth-fp16.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models -o control_depth-fp16.safetensors --check-certificate=false
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/ckpt/ControlNet/resolve/main/control_hed-fp16.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models -o control_hed-fp16.safetensors --check-certificate=false
@@ -63,9 +67,13 @@ aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/ckp
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/ckpt/ControlNet/resolve/main/t2iadapter_canny_sd14v1.pth -d /workspace/stable-diffusion-webui/extensions/sd-webui-controlnet/models -o t2iadapter_canny_sd14v1.pth --check-certificate=false
 
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M "https://civitai.com/api/download/models/6987?type=Model&format=SafeTensor" -d /workspace/stable-diffusion-webui/models/Stable-diffusion -o realisticVisionV13_v13.safetensors --check-certificate=false
-
+# round glass lora
+aria2c --console-log-level=error -c -x 16 -s 16 -k 1M "https://civitai.com/api/download/models/25337?type=Model&format=SafeTensor" -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o roundglasses.safetensors --check-certificate=false
+aria2c --console-log-level=error -c -x 16 -s 16 -k 1M "https://huggingface.co/Linaqruf/stolen/resolve/main/pruned-models/chillout_mix-pruned.safetensors" -d /workspace/stable-diffusion-webui/models/Stable-diffusion -o clm.safetensors --check-certificate=false
 sed -i -e '''/    prepare_environment()/a\    os.system\(f\"""sed -i -e ''\"s/dict()))/dict())).cuda()/g\"'' /workspace/stable-diffusion-webui/repositories/stable-diffusion-stability-ai/ldm/util.py""")''' /workspace/stable-diffusion-webui/launch.py
 sed -i -e 's/fastapi==0.90.1/fastapi==0.89.1/g' /workspace/stable-diffusion-webui/requirements_versions.txt
+
+aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.ckpt -d /workspace/stable-diffusion-webui/ -o newVae.vae.pth --check-certificate=false
 
 mkdir /workspace/stable-diffusion-webui/extensions/deforum-for-automatic1111-webui/models
 
