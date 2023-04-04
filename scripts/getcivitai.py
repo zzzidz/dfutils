@@ -12,7 +12,7 @@ def download_model(model_id, model_type, output_dir, output_file):
 
 def main():
     parser = argparse.ArgumentParser(description="Download model from CivitAI")
-    parser.add_argument("model", help="Model type: lora or checkpoint")
+    parser.add_argument("model", help="Model type: lora, checkpoint or embeddings")
     parser.add_argument("model_id", help="Model ID")
     parser.add_argument("output_name", help="Output file name without extension")
 
@@ -20,14 +20,22 @@ def main():
 
     if args.model == "lora":
         output_dir = "/workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora"
+        output_file_ext = ".safetensors"
     elif args.model == "checkpoint":
         output_dir = "/workspace/stable-diffusion-webui/models/Stable-diffusion"
+        output_file_ext = ".safetensors"
+    elif args.model == "embeddings":
+        output_dir = "/workspace/stable-diffusion-webui/embeddings"
+        output_file_ext = ".pt"
     else:
-        raise ValueError("Invalid model type. Must be 'lora' or 'checkpoint'.")
+        raise ValueError("Invalid model type. Must be 'lora', 'checkpoint', or 'embeddings'.")
 
-    output_file = f"{args.output_name}.safetensors"
+    output_file = f"{args.output_name}{output_file_ext}"
 
     download_model(args.model_id, args.model, output_dir, output_file)
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
