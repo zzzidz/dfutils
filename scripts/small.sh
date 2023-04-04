@@ -44,7 +44,9 @@ aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/ckp
 # round glass lora
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/zzztuizz/blinh/resolve/main/output/blinh-000012.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o blinh.safetensors --check-certificate=false
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M "https://civitai.com/api/download/models/25337?type=Model&format=SafeTensor" -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o roundglasses.safetensors --check-certificate=false
+
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M "https://huggingface.co/Linaqruf/stolen/resolve/main/pruned-models/chillout_mix-pruned.safetensors" -d /workspace/stable-diffusion-webui/models/Stable-diffusion -o clm.safetensors --check-certificate=false
+aria2c --console-log-level=error -c -x 16 -s 16 -k 1M "https://civitai.com/api/download/models/35255" -d /workspace/stable-diffusion-webui/models/Stable-diffusion -o bra.safetensors --check-certificate=false
 sed -i -e '''/    prepare_environment()/a\    os.system\(f\"""sed -i -e ''\"s/dict()))/dict())).cuda()/g\"'' /workspace/stable-diffusion-webui/repositories/stable-diffusion-stability-ai/ldm/util.py""")''' /workspace/stable-diffusion-webui/launch.py
 sed -i -e 's/fastapi==0.90.1/fastapi==0.89.1/g' /workspace/stable-diffusion-webui/requirements_versions.txt
 
