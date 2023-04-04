@@ -38,6 +38,7 @@ git clone https://github.com/ashen-sensored/stable-diffusion-webui-two-shot /wor
 cd /workspace/stable-diffusion-webui
 git reset --hard
 
+aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/zzztuizz/blinh/resolve/main/output/blinh-000012.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o blinh.safetensors --check-certificate=false
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/zzztuizz/tsin1/resolve/main/output/last.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o tsinnew.safetensors --check-certificate=false
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/zzztuizz/tsin1/resolve/main/output/last.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o tsinnew.safetensors --check-certificate=false
 aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/zzztuizz/tsin/resolve/main/output/tsin-000010.safetensors -d /workspace/stable-diffusion-webui/extensions/sd-webui-additional-networks/models/lora -o tsin010.safetensors --check-certificate=false
