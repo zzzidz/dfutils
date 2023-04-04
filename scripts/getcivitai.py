@@ -3,6 +3,7 @@ import subprocess
 
 def download_model(model_id, model_type, output_dir, output_file):
     url = f"https://civitai.com/api/download/models/{model_id}"
+    print("Load model at", url)
     aria2c_command = [
         "aria2c", "--console-log-level=error", "-c", "-x", "16", "-s", "16", "-k", "1M", url, "-d", output_dir, "-o", output_file, "--check-certificate=false"
     ]
