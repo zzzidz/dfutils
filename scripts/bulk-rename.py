@@ -12,6 +12,10 @@ def wsl_windows_path_to_linux(windows_path):
     linux_path = linux_path.replace('\\', '/')
     return linux_path
 
+def touch(file):
+    with open(file, "w+"):
+        pass
+    
 def rename_images_in_folder(folder_path):
     # List all files in the folder
     files = os.listdir(folder_path)
@@ -30,11 +34,12 @@ def rename_images_in_folder(folder_path):
         new_file_name = f"{i}{file_extension}"
         new_file_path = os.path.join(folder_path, new_file_name)
         shutil.move(old_file_path, new_file_path)
+        touch(os.path.join(folder_path, f"{i}.txt"))
         print(f"Renamed '{old_file_path}' to '{new_file_path}'")
 
 if __name__ == "__main__":
     # Set the folder path containing images (Windows path)
-    windows_folder_path = "G:\\preprocess\\lgiang\\birme-768x768 (3)"
+    windows_folder_path = "G:\\preprocess\\ctu\\birme-768x768 (4)"
 
     # Convert the Windows path to the corresponding WSL Linux path
     linux_folder_path = wsl_windows_path_to_linux(windows_folder_path)
